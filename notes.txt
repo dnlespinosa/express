@@ -1,0 +1,79 @@
+Express.js
+    minimalist framework 
+    very similar to flask
+        express is a node framework, flask is a python framework 
+    Most popular in the node ecosyste 
+
+Installing Express 
+    npm init --yes
+    npm install express
+    express.js.com/en/4x/api.html
+
+    app.listen(port# (3000 is standard), callback function to be executed when the server starts)
+
+    app dopesn't do anything except respond 404s but server is running 
+    app.listen takes a port and a callback 
+        binds the server to port and listens for requests there 
+        calls the callback once server has started
+    app.listen should be at the bottom of the page
+
+    in the console, node -name of file-.js
+    localhost:3000 in browser
+
+Our First Route 
+    route handlers are event listeners, they like flask view functions 
+
+Route Handler 
+    every handlers should have a callback with two aparamters 
+        request: information about request 
+        response: useful methods for sending a response 
+    they will commonly see req and res 
+
+Request-Response Cycle 
+    when you start the server, express runs through the file and registers ALL the event listeners before app.listen at the bottom
+    when a user makes a request, express invokes the first matching route handler it finds until a response is issued via a method on the response object 
+    It is matched to the FIRST matching route, keep this in mind for similarly named routes 
+
+Route Methods 
+    here are the route methods you will likely use 
+        app.get
+        app.post
+        app.put
+        app.patch
+        app.catch
+    
+Nodemon 
+    Package we can install with npm that we can use to run our file rather than node 
+    nodemon restarts the server when you edit files or if the server crashes
+    install globally, so you can use it in any project 
+        npm install --global nodemon
+    To start server:
+        nodemon -name of file-.js
+    
+URL Parameters
+    specify parametes in the route by prefixing them with a colon
+
+        app.get('/staff/:fname', function (req, res) {
+            return res.send(`This instructor is ${req.params.fname}`);
+        });
+    
+    all of our parameters become keys in an object found at req.params
+    The values are always strings 
+
+What to Return?
+    express does not care if you return or not
+    res.send will send the response regardless
+    IT DOES MEAN SOMETHING TO JAVASCRIPT
+        no other code after that code will run 
+    return indicates that you're DONE with the function 
+    It doesn't matter for express
+
+Request 
+    request.query
+
+Parsing the Body 
+    Tell express to parse request bodies for either form data or JSON 
+        app.use(express.json());
+        app.use(express.urlencoded({ extended:true }));
+    
+
